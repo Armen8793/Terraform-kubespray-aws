@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "LD3sWqLFqsN7ge4WTP+xN2W7+DRN4oVRNsdA2l4ZWXY=",
+  "Source": "ApiMicroservice",
+  "BasePath": "_content/ApiMicroservice",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
