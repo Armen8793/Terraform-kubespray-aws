@@ -25,3 +25,20 @@ vim terraform.tfvars
 terraform init
 terraform plan -out my-test-plan -var-file=credentials.tfvars
 terraform apply "my-test-plan"
+
+### Now we can begin to deploy a Kubernetes cluster using Ansible
+```
+cd ~/kubespray
+cat inventory/hosts
+```
+### Now load SSH keys, which were created in AWS
+```
+cat “” > ~/.ssh/mysomekey.pem
+eval $(ssh-agent)
+ssh-add -D
+ssh-add ~/.ssh/mysomekey.pem
+```
+### now we can deploy our cluster by Ansible
+```
+ansible-playbook -i ./inventory/hosts ./cluster.yml -e ansible_user=armen -b --become-user=root --flush-cache
+```
