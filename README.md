@@ -25,6 +25,7 @@ vim terraform.tfvars
 terraform init
 terraform plan -out my-test-plan -var-file=credentials.tfvars
 terraform apply "my-test-plan"
+```
 
 ### Now we can begin to deploy a Kubernetes cluster using Ansible
 ```
