@@ -3,6 +3,8 @@
 ### clone the kubespray repo 
 ```
 git clone https://github.com/kubernetes-sigs/kubespray.git
+cd kubespray
+sudo pip install requirements.txt
 ```
 ### enter the dir and copy the credentials
 ```
