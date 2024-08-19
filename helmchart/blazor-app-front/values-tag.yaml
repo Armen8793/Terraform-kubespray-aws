@@ -1,0 +1,4 @@
+image:
+    repository: image-registry-url/group/repository@sha256:image-sha-generated-in-gitlab-ci-pipeline
+    pullPolicy: IfNotPresent
+    tag: []

@@ -1,0 +1,82 @@
+# Default values for currencyratesinfoapi.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+revisionHistoryLimit: 3
+label:
+  kindofrole: apimicroservice
+env:
+    enable: true
+    ASPNETCORE_ENVIRONMENT: Development #this is taken from apisettings.Development.json file info
+    ASPNETCORE_URLS: 'http://0.0.0.0:8080'
+envSecrets:
+    enable: true
+
+# required if the developer configured health in his code, take the url path he has given in the code
+probes:
+    liveness:
+        url: /healthz
+        port: 8080
+    readiness:
+        url: /healthz
+        port: 8080
+serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+podAnnotations: {}
+podSecurityContext: {}
+# fsGroup: 2000
+securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+service:
+    type: ClusterIP
+    port: 8080
+ingress:
+    enabled: true
+    className: "nginx"
+    annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: HTTP
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/rewrite-target: /$2
+        nginx.ingress.kubernetes.io/use-regex: 'true'
+    hosts:
+        - host: example.com
+          paths:
+            - path: /apimicroservice(/|$)(.*)
+              pathType: Prefix
+              backend:
+                service:
+                    name: apimicroservice-service
+                    port: 8080
+    tls:
+        - hosts:
+            - example.com
+resources:
+    limits:
+        # cpu: 1000m
+        memory: 210Mi
+    requests:
+        cpu: 48m
+        memory: 210Mi
+autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+nodeSelector: {}
+tolerations: []
+affinity: {}

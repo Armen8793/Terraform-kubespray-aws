@@ -1,0 +1,22 @@
+secrets:
+    some-service_PASSWORD: ENC[AES256_GCM,data:data,iv:data,tag:your-tag,type:str]
+    other-service_PASSWORD: ENC[AES256_GCM,data:encrypted-passwd,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2024-07-25T08:22:05Z"
+    mac: ENC[AES256_GCM,data:data/data/data/data/D+/data,iv:data,tag:your-tag,type:str]
+    pgp:
+        - created_at: "2024-07-25T08:22:05Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+                  PGP key here
+            -----END PGP MESSAGE-----
+          fp: fp code here
+    unencrypted_suffix: _unencrypted
+    version: 3.9.0
+
+
