@@ -44,7 +44,7 @@ sonarqube-check:
     - "dotnet tool install --global dotnet-sonarscanner"
     - "dotnet tool install --global JetBrains.dotCover.GlobalTool"
     - "export PATH=\"$PATH:$HOME/.dotnet/tools\""
-    - "dotnet sonarscanner begin /k:\"Armen8793_Terraform-kubespray-aws_BlazorAppFront_AYne8G9WUJ9fzw-Nc_0S\" /d:sonar.token=\"$SONAR_TOKEN\" /d:\"sonar.host.url=$SONAR_HOST_URL\" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html"
+    - "dotnet sonarscanner begin /k:\"Armen8793_gitops-dotnet-helm-argocd_BlazorAppFront_AYne8G9WUJ9fzw-Nc_0S\" /d:sonar.token=\"$SONAR_TOKEN\" /d:\"sonar.host.url=$SONAR_HOST_URL\" /d:sonar.cs.dotcover.reportsPaths=dotCover.Output.html"
     - "dotnet build"
     - "dotnet dotcover test Frontend/BlazorAppFront/BlazorAppFront.csproj --dcReportType=HTML"
     - "dotnet sonarscanner end /d:sonar.token=\"$SONAR_TOKEN\""
@@ -77,10 +77,10 @@ tests:
   after_script:
     - export IMAGE_SHA256=$(docker inspect --format='{{index .RepoDigests 0}}' ${CI_REGISTRY_IMAGE}:${IMAGE_TAG})
     - git config --global user.email "${GITLAB_USER_EMAIL}" && git config --global user.name "gitlab-ci-token"
-    - git clone https://gitlab-ci-token:$GRP_GIT_PULL_PUSH_TOKEN@${CI_SERVER_HOST}/Armen8793/Terraform-kubespray-aws.git
-    - 'echo -e "image:\n    repository: $IMAGE_SHA256\n    pullPolicy: IfNotPresent\n    tag: []" > Terraform-kubespray-aws/helmchart/blazor-app-front/values-tag.yaml'
+    - git clone https://gitlab-ci-token:$GRP_GIT_PULL_PUSH_TOKEN@${CI_SERVER_HOST}/Armen8793/gitops-dotnet-helm-argocd.git
+    - 'echo -e "image:\n    repository: $IMAGE_SHA256\n    pullPolicy: IfNotPresent\n    tag: []" > gitops-dotnet-helm-argocd/helmchart/blazor-app-front/values-tag.yaml'
     - cd argocd-deployer-services && git add -A && git commit -m "add new image blazor-app-front"
-    - git push https://gitlab-ci-token:$GRP_GIT_PULL_PUSH_TOKEN@${CI_SERVER_HOST}/Armen8793/Terraform-kubespray-aws.git HEAD:main
+    - git push https://gitlab-ci-token:$GRP_GIT_PULL_PUSH_TOKEN@${CI_SERVER_HOST}/Armen8793/gitops-dotnet-helm-argocd.git HEAD:main
   tags:
     - docker
   dependencies:
